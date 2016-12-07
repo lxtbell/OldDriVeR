@@ -7,6 +7,8 @@ class UCameraComponent;
 class USpringArmComponent;
 class UTextRenderComponent;
 class UInputComponent;
+class UParticleSystemComponent;
+
 UCLASS(config=Game)
 class AOldDriVeRPawn : public AWheeledVehicle
 {
@@ -39,6 +41,9 @@ class AOldDriVeRPawn : public AWheeledVehicle
 	/** Text component for the In-Car gear */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UTextRenderComponent* InCarGear;
+
+	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UParticleSystemComponent* SnowParticles;
 
 	
 public:
