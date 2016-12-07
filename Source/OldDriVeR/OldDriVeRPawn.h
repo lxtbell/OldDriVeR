@@ -24,6 +24,10 @@ class AOldDriVeRPawn : public AWheeledVehicle
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class USceneComponent* InternalCameraBase;
 
+	/** Spring arm that will offset the camera */
+	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent* InternalSpringArm;
+
 	/** Camera component for the In-Car view */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* InternalCamera;
