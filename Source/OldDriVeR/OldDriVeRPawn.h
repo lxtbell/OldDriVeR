@@ -7,6 +7,8 @@ class UCameraComponent;
 class USpringArmComponent;
 class UTextRenderComponent;
 class UInputComponent;
+class UParticleSystemComponent;
+
 UCLASS(config=Game)
 class AOldDriVeRPawn : public AWheeledVehicle
 {
@@ -24,6 +26,10 @@ class AOldDriVeRPawn : public AWheeledVehicle
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class USceneComponent* InternalCameraBase;
 
+	/** Spring arm that will offset the camera */
+	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent* InternalSpringArm;
+
 	/** Camera component for the In-Car view */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* InternalCamera;
@@ -35,6 +41,9 @@ class AOldDriVeRPawn : public AWheeledVehicle
 	/** Text component for the In-Car gear */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UTextRenderComponent* InCarGear;
+
+	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UParticleSystemComponent* SnowParticles;
 
 	
 public:

@@ -71,16 +71,27 @@ AOldDriVeRPawn::AOldDriVeRPawn()
 	Camera->FieldOfView = 90.f;
 
 	// Create In-Car camera component 
-	InternalCameraOrigin = FVector(0.0f, -40.0f, 120.0f);
+	InternalCameraOrigin = FVector(10.0f, -40.0f, 120.0f);
 
 	InternalCameraBase = CreateDefaultSubobject<USceneComponent>(TEXT("InternalCameraBase"));
 	InternalCameraBase->SetRelativeLocation(InternalCameraOrigin);
 	InternalCameraBase->SetupAttachment(GetMesh());
 
+	// Create a spring arm component
+	InternalSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("InternalSpringArm0"));
+	InternalSpringArm->TargetOffset = FVector(0.f, 0.f, 0.f);
+	InternalSpringArm->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
+	InternalSpringArm->SetupAttachment(InternalCameraBase);
+	InternalSpringArm->TargetArmLength = 10.0f;
+	InternalSpringArm->bEnableCameraRotationLag = true;
+	InternalSpringArm->CameraRotationLagSpeed = 7.f;
+	InternalSpringArm->bInheritPitch = false;
+	InternalSpringArm->bInheritRoll = false;
+
 	InternalCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("InternalCamera"));
 	InternalCamera->bUsePawnControlRotation = false;
 	InternalCamera->FieldOfView = 90.f;
-	InternalCamera->SetupAttachment(InternalCameraBase);
+	InternalCamera->SetupAttachment(InternalSpringArm);
 
 	//Setup TextRenderMaterial
 	static ConstructorHelpers::FObjectFinder<UMaterial> TextMaterial(TEXT("Material'/Engine/EngineMaterials/AntiAliasedTextMaterialTranslucent.AntiAliasedTextMaterialTranslucent'"));
@@ -102,6 +113,9 @@ AOldDriVeRPawn::AOldDriVeRPawn()
 	InCarGear->SetRelativeRotation(FRotator(25.0f, 180.0f,0.0f));
 	InCarGear->SetRelativeScale3D(FVector(1.0f, 0.4f, 0.4f));
 	InCarGear->SetupAttachment(GetMesh());
+
+	SnowParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("SnowParticles"));
+	SnowParticles->SetupAttachment(RootComponent);
 	
 	// Colors for the incar gear display. One for normal one for reverse
 	GearDisplayReverseColor = FColor(255, 0, 0, 255);
